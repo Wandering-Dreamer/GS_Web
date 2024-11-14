@@ -17,12 +17,12 @@ const WelcomeScreen = ({ navigation }: Props) => {
     <NativeBaseProvider>
       <Center flex={1} bg="white">
         <Box>
-          <Button onPress={() => navigation.navigate('Login')}>
-            Ir para Login
+        <Button bgColor={'purple.500'} margin={5} onPress={() => navigation.navigate('Config')}>
+            Ir para a tela de Login
           </Button>
-          <Button onPress={() => navigation.navigate('SignUp')} mt={4}>
-            Cadastrar
-          </Button>
+          <Button bgColor={'blue.500'} margin={5} onPress={() => navigation.navigate('SignUp')}>
+            Ir para a tela de Sign Up
+            </Button>
         </Box>
       </Center>
     </NativeBaseProvider>
