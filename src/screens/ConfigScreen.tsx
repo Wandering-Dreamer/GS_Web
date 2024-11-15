@@ -30,25 +30,27 @@ const ConfigScreen= ({ navigation }: Props) => {
     ];
   
     const handleSavePreferences = async () => {
-        try {
-          const response = await fetch('http://localhost:3000/api/preferences/save', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              userId: 1, // ID do usuário para o exemplo
-              chargerType: chargerType,
-              preferredTime: selectedTime,
-            }),
-          });
-          const result = await response.json();
-          console.log('Preferências salvas:', result);
-        } catch (error) {
-          console.error('Erro ao salvar preferências:', error);
-        }
-      };
+      try {
+        const response = await fetch('http://localhost:3000/api/preferences/save', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: 1, // Substitua pelo ID real do usuário
+            chargerType: chargerType,
+            preferredTime: selectedTime,
+          }),
+        });
+        const result = await response.json();
+        console.log('Preferências salvas:', result);
     
+        // Após salvar, navega para a tela de Status
+        navigation.navigate('Status');
+      } catch (error) {
+        console.error('Erro ao salvar preferências:', error);
+      }
+    };
   
     return (
       <View style={styles.container}>

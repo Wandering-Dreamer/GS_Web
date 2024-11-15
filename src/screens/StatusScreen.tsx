@@ -10,7 +10,7 @@ type Props = {
 };
 
 const StatusScreen = ({ navigation }: Props) => {
-  const [chargeLevel, setChargeLevel] = useState(50); // Estado inicial da carga (ex: 50%)
+  const [chargeLevel, setChargeLevel] = useState(0); // Estado inicial da carga (ex: 50%)
   const [chargerType, setChargerType] = useState(''); // Tipo de carregador do backend
   const [preferredTime, setPreferredTime] = useState(''); // Horário preferido do backend
 
@@ -26,15 +26,18 @@ const StatusScreen = ({ navigation }: Props) => {
   useEffect(() => {
     const fetchPreferences = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/preferences/1'); // Substitua "1" pelo userId real
+        console.log('Buscando preferências...');
+        const response = await fetch('http://localhost:3000/api/preferences/1'); // Substitua 1 pelo userId real
+        console.log('Resposta do servidor:', response);
         if (!response.ok) {
           throw new Error('Erro ao buscar preferências do usuário');
         }
         const data = await response.json();
-        setChargerType(data.chargerType || 'Indefinido');
-        setPreferredTime(data.preferredTime || 'Indefinido');
+        console.log('Dados recebidos:', data);
+        setChargerType(data.charger_type || 'Indefinido');
+        setPreferredTime(data.preferred_time || 'Indefinido');
       } catch (error) {
-        console.error(error.message);
+        console.error('Erro ao buscar preferências:', error);
       }
     };
 
