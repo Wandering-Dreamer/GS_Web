@@ -17,7 +17,7 @@ const WelcomeScreen = ({ navigation }: Props) => {
     <NativeBaseProvider>
       <Center flex={1} bg="white">
         <Box>
-        <Button bgColor={'purple.500'} margin={5} onPress={() => navigation.navigate('Config')}>
+        <Button bgColor={'purple.500'} margin={5} onPress={() => navigation.navigate('Login')}>
             Ir para a tela de Login
           </Button>
           <Button bgColor={'blue.500'} margin={5} onPress={() => navigation.navigate('SignUp')}>

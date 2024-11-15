@@ -11,8 +11,8 @@ type Props = {
 
 const StatusScreen = ({ navigation }: Props) => {
   const [chargeLevel, setChargeLevel] = useState(50); // Estado inicial da carga (ex: 50%)
-  const [chargerType, setChargerType] = useState('AC'); // Simulando preferência do usuário
-  const [preferredTime, setPreferredTime] = useState('00:00 - 06:00'); // Simulando horário preferido
+  const [chargerType, setChargerType] = useState(''); // Tipo de carregador do backend
+  const [preferredTime, setPreferredTime] = useState(''); // Horário preferido do backend
 
   // Simulação de progresso de recarga
   useEffect(() => {
@@ -20,6 +20,25 @@ const StatusScreen = ({ navigation }: Props) => {
       setChargeLevel(prev => (prev < 100 ? prev + 5 : 100)); // Incrementa até 100%
     }, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Busca as preferências do usuário no backend
+  useEffect(() => {
+    const fetchPreferences = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/preferences/1'); // Substitua "1" pelo userId real
+        if (!response.ok) {
+          throw new Error('Erro ao buscar preferências do usuário');
+        }
+        const data = await response.json();
+        setChargerType(data.chargerType || 'Indefinido');
+        setPreferredTime(data.preferredTime || 'Indefinido');
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchPreferences();
   }, []);
 
   return (

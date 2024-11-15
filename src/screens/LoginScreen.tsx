@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeBaseProvider, Box, Button, Input, Center } from 'native-base';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
@@ -31,6 +33,15 @@ const LoginScreen = ({ navigation }: Props) => {
       } else {
         RNAlert.alert('Erro', 'Ocorreu um erro inesperado.');
       }
+    }
+  };
+
+  const loginUser = async (userId) => {
+    try {
+      await AsyncStorage.setItem('userId', userId.toString());
+      // Agora o userId está salvo no AsyncStorage
+    } catch (error) {
+      console.error('Erro ao salvar userId no AsyncStorage', error);
     }
   };
 

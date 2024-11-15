@@ -12,7 +12,7 @@ type Props = {
   navigation: ConfigNavigationProp;
 };
 
-const ConfigScreen = () => {
+const ConfigScreen= ({ navigation }: Props) => {
     const [chargerType, setChargerType] = useState('AC');
     const [selectedTime, setSelectedTime] = useState('00:00 - 06:00');
   
@@ -87,8 +87,8 @@ const ConfigScreen = () => {
         Salvar preferências
         </Button>
 
-        <Button bgColor={"purple.500"} margin={5} onPress={() => navigation.navigate('Config')}>
-        Salvar preferências
+        <Button bgColor={"purple.500"} margin={5} onPress={() => navigation.navigate('Status')}>
+        Tela de Status
         </Button>
       </View>
     );
